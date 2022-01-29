@@ -245,5 +245,3 @@ Até então, tudo bem. Porém, temos um pequeno empecilho no caminho. Para que p
 </ul>
 Enfim, temos um aplicação rodando, com implementação de CRUD em banco de dados e persistência em JPA e Hibernate.
 
-#webManagerServlet
-
