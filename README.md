@@ -1,12 +1,23 @@
 # JpaMaven
 
-Atualizando SE em Maven Project
+**Aplicação em Springboot com foco em implementação de banco de dados com JPA(Hibernate).**
+
+## Social Medias
+
+- https://www.linkedin.com/in/jpfigueredo/
+- https://www.instagram.com/figfig.jpg/
+
+## O que deveria saber
+- Java programming
+- Oriented Object Programming
+- Network -> HTTP Protocols/Request/Response
+- SQL knowledge(CRUD)
 
 # Sumário
 
-# [Configurando pom.xml](#configurando-pom-xml)
-# [Implementando CRUD](#implementando-crud)
-# [EntityManager e EntityManagerFactory](#entityManager-e-entityManagerFactory)
+- [Configurando pom.xml](#configurando-pom-xml)
+- [Implementando CRUD](#implementando-crud)
+- [EntityManager e EntityManagerFactory](#entityManager-e-entityManagerFactory)
 
 
 ## Configurando pom.xml
@@ -54,7 +65,8 @@ Atualizando SE em Maven Project
 Dentro do pom.xml devemos ter, como propriedade, a versão do Maven e, como dependências, ou seja, importações de bibliotecas extenas, o conector com MySQL e o Hibernate e sua função EntityManager.
 
 Assim que terminamos suas configurações, devemos agora incluir uma pasta META-INF, dentro de resources, com o arquivo persistence.xml.
-<strong>Este arquivo será responsável por definir a URL, o drive e o user e password do Banco MySQL</strong><br>No caso estou utilizando Xampp para inicializá-lo.
+**Este arquivo será responsável por definir a URL, o drive e o user e password do Banco MySQL**
+No caso estou utilizando Xampp para inicializá-lo.
 
 As configurações são as seguintes:
 ```java
@@ -103,7 +115,7 @@ Driver, user e password são padrões, pode ser alterado caso necessário. E, po
 	<property name="hibernate.hbm2ddl.auto" value="update" />
 ```
 Esta última propriedade serva para gerar automaticamente o Database, 
-O <i>value="update"</i> atualiza o banco. Ele pode receber valores como <i>value="create"</i>, assim toda vez que rodarmos a aplicação, o banco de dados será recriado.
+O *value="update"* atualiza o banco. Ele pode receber valores como *value="create"*, assim toda vez que rodarmos a aplicação, o banco de dados será recriado.
 
 Feitas as configurações, finalmente conseguimos entrar em "contato" com o Banco de Dados proveniente da injeção de dependências.
 Agora podemos começar a implementar nossa aplicação.
@@ -127,7 +139,7 @@ Agora iremos definir as variáveis que serão utilizadas como colunas no nosso b
 	private String email;
 ```
 Os @ significam anotações, que são configurações para identificação. 
-O <i>@Id</i> identifica o atributo como Chave-Primária e o <i>@GeneratedValue(strategy = GenerationType.IDENTITY)</i> define um autoincremento para o id.
+O *@Id* identifica o atributo como Chave-Primária e o *@GeneratedValue(strategy = GenerationType.IDENTITY)* define um autoincremento para o id.
 
 ***Nota:** Poderiamos definir @Column() para configurar o nome da coluna, porém o banco já faz isso para nós, mas, caso queira, segue o exemplo:*
 ```java
@@ -230,12 +242,12 @@ Para entendermos como funciona o EntityManager, um teste será feito. Nele, irem
 	System.out.println(p);
 ```
 Antes do EntityManager "em.find()" era necessário fazer todo o trabalho à mão, então era preciso 
-<ol>
-	<li>Fazer uma pesquisa no DB</li> 
-	<li>Converte o dado para objeto</li> 
-	<li>Instancia o objeto</li>
-</ol>
-Isso tudo é evitado com um simples .find() *MAGIC*
+
+- Fazer uma pesquisa no DB
+- Converte o dado para objeto
+- Instancia o objeto
+
+Isso tudo é evitado com um simples .find()
 
 Até então, tudo bem. Porém, temos um pequeno empecilho no caminho. Para que possamos fazer um alteração, ou seja, inserção ou deleção. Precisamos definir uma transação e, por fins de segurança, encerrá-la. Toda alteração será inserida entre esse bloco. 
 ```java
@@ -244,10 +256,10 @@ Até então, tudo bem. Porém, temos um pequeno empecilho no caminho. Para que p
 	em.close();
 	emf.close();
 ```
-<ul>
-	<li>.begin() Incia a transação</li> 
-	<li>.commit() Confirma as alterações feitas</li> 
-	<li.close() encerra comunicação.</li>
-</ul>
+
+- .begin() Incia a transação
+- .commit() Confirma as alterações feitas
+- .close() encerra comunicação.
+
 Enfim, temos um aplicação rodando, com implementação de CRUD em banco de dados e persistência em JPA e Hibernate.
 
