@@ -2,7 +2,14 @@
 
 Atualizando SE em Maven Project
 
-Adicionando propriedades do Maven no pom.xml
+# Sumário
+
+# [Configurando pom.xml](#configurando-pom-xml)
+# [Implementando CRUD](#implementando-crud)
+# [EntityManager e EntityManagerFactory](#entityManager-e-entityManagerFactory)
+
+
+## Configurando pom.xml
 ```java
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -101,6 +108,8 @@ O <i>value="update"</i> atualiza o banco. Ele pode receber valores como <i>value
 Feitas as configurações, finalmente conseguimos entrar em "contato" com o Banco de Dados proveniente da injeção de dependências.
 Agora podemos começar a implementar nossa aplicação.
 
+## Implementando CRUD
+
 Agora, o nosso projeto usará deste Banco para fazer seu CRUD.
 Primeiramente, iremos definir um modelo Pessoa, que servirá de tabela.
 Começaremos por implementar Serializable e configurar como uma Entidade.
@@ -120,7 +129,7 @@ Agora iremos definir as variáveis que serão utilizadas como colunas no nosso b
 Os @ significam anotações, que são configurações para identificação. 
 O <i>@Id</i> identifica o atributo como Chave-Primária e o <i>@GeneratedValue(strategy = GenerationType.IDENTITY)</i> define um autoincremento para o id.
 
-<i><strong>Nota:</strong> Poderiamos definir @Column() para configurar o nome da coluna, porém o banco já faz isso para nós, mas, caso queira, segue o exemplo:</i>
+***Nota:** Poderiamos definir @Column() para configurar o nome da coluna, porém o banco já faz isso para nós, mas, caso queira, segue o exemplo:*
 ```java
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -141,11 +150,6 @@ public class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	/* @Column(name = "nomeCompleto") */
-	/*
-	 * Podemos personalizar, porém vamos deixar o mySQL usar o nome dos atributos
-	 * para as colunas
-	 */
 	private String nome;
 	private String email;
 
@@ -207,7 +211,9 @@ public class Programa {
 }
 
 ```
-<i>O ID consta como nulo pois definimos o autoincremento na classe Pessoa, o que quer dizer que o próprio banco de dados irá definir e adicionar conforme inserção.</i>
+*O ID consta como nulo pois definimos o autoincremento na classe Pessoa, o que quer dizer que o próprio banco de dados irá definir e adicionar conforme inserção.*
+
+## EntityManager e EntityManagerFactory
 
 Instanciadas as classes, agora iremos definir um EntityManagerFactory para que possamos criar um EntityManager. Essas duas <strong>INTERFACES</strong> serão responsáveis por gerar a <Strong>Fabrica(Factory)</strong> de manipulação e pelo <strong>Entity Management(Manipulação de Entidades)</strong> no banco de dados.
 
